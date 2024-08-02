@@ -5,15 +5,18 @@ repository 소개
 ```bash
 # main
 $ pip install git+https://github.com/DE32megabox/transform.git
+
 # branch
 $ pip install git+https://github.com/DE32megabox/transform.git@dev/d1.0.0
 
 $ git clone git@github.com:DE32megabox/transform.git
 $ cd transform
+$ source .venv/bin/activate
+$ pdm install
+$ pytest
 
 # option
 $ pdm venv create
-$ source .venv/bin/activate
 ```
 
 ## 실행예제

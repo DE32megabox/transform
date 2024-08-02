@@ -1,0 +1,17 @@
+[project]
+name = "transform"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "minju210", email = "juliana6190210@gmail.com"},
+]
+dependencies = [
+    "transform @ file:///${PROJECT_ROOT}/",
+]
+requires-python = "==3.11.*"
+readme = "README.md"
+license = {text = "MIT"}
+
+
+[tool.pdm]
+distribution = false
