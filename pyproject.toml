@@ -6,7 +6,6 @@ authors = [
     {name = "minju210", email = "juliana6190210@gmail.com"},
 ]
 dependencies = [
-    "transform @ file:///${PROJECT_ROOT}/",
 ]
 requires-python = "==3.11.*"
 readme = "README.md"
