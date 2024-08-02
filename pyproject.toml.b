@@ -19,3 +19,7 @@ distribution = false
 test = [
     "pytest>=8.3.2",
 ]
+
+[tool.pytest.ini_options]
+pythonpath = [
+  ".", "src",                                                                                                           ]
