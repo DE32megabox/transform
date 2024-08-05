@@ -36,3 +36,9 @@ def ice_breaking():
     return
 
 ice_breaking()
+
+def transform(load_dt, df):
+# to do 아자아자!!!!!!
+
+
+retrutn  df
