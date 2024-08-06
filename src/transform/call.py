@@ -3,9 +3,10 @@ import os
 
 def apply_type2df(load_dt="20210101", path="~/megabox/tmp/movie_parquet"):
     df = pd.read_parquet(f"{path}/load_dt={load_dt}")
-    num_cols = ['rnum', 'movieNm', 'openDt', 'salesAmt',  'audiCnt', 'audiAcc']    #순번, 영화명(국문), 영화개봉일, 당일매출액, 당일관객수
-
-    for col in num_cols:
+    num_cols = ['rnum', 'movieNm', 'openDt', 'salesAmt',  'audiCnt']    
+    #순번, 영화명(국문), 영화개봉일, 당일매출액, 당일관객수
+    c_cols = ['salesAmt','audiCnt']
+    for col in c_cols:
         df[col] = pd.to_numeric(df[col])
     df['load_dt'] = load_dt
     df['load_dt'] = df['load_dt'].astype(int).astype(str)
