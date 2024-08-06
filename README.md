@@ -3,7 +3,7 @@
 Transform 패키지는 영화 박스오피스 데이터의 ETL(Extract, Transform, Load) 과정 중 변환(Transform) 단계에서 데이터를 정제하고 가공하는 기능을 제공합니다.
 ## 설치방법
 
-이 레포지토리는 다음과 같이 설치할 수 있습니다.
+이 레파지토리는 다음과 같이 설치할 수 있습니다.
 
 메인 브랜치에서 패키지를 설치하려면 다음 명령어를 사용합니다.
 ```bash
@@ -44,11 +44,40 @@ $ pytest
 $ pdm venv create
 ```
 
-## 실행예제
-```
-실행방법을 담은 bash 코드
+## 사용법
+Transform 패키지는 데이터를 정제하고 가공하는 기능을 제공합니다. 아래는 주요 함수와 그 사용법에 대한 설명입니다.
+
+### (1) apply_type2df 함수
+주어진 데이터프레임의 특정 열을 숫자로 변환하고, 날짜 형식을 설정합니다.
+```python
+def apply_type2df(load_dt="20210101", path="~/megabox/tmp/movie_parquet"):
+  df = pd.read_parquet(f"{path}/load_dt={load_dt}")
+  num_cols = ['rnum', 'rank', 'rankInten', 'salesAmt', 'audiCnt', 'audiAcc', 'scrnCnt', 'showCnt', 'salesShare', 'salesInten', 'salesChange', 'audiInten', 'audiChange']
+
+for col in num_cols:
+  df[col] = pd.to_numeric(df[col])
+df['load_dt'] = load_dt
+df['load_dt'] = df['load_dt'].astype(int).astype(str)
+df['load_dt'] = pd.to_datetime(df['load_dt'], format='%Y%m%d')
+print(df)
+return df
 ```
 
+### (2) transform2df 함수
+데이터를 가공하여 필요한 열만 선택하여 새로운 데이터프레임을 반환합니다.
+```python
+def transform2df(load_dt="20210101"):
+  df = apply_type2df(load_dt)
+  num_cols = ['rnum', 'rank', 'rankInten', 'salesAmt', 'audiCnt', 'audiAcc', 'scrnCnt', 'showCnt', 'salesShare', 'salesInten', 'salesChange', 'audiInten', 'audiChange', 'load_dt']
+  new_df = df[num_cols]
+  return new_df
 ```
-코드를 실행하면 나오는 내용에 대한 코드
+
+### (3) save2df 함수
+가공된 데이터를 주어진 경로에 저장합니다.
+```python
+def save2df(load_dt="20210101", path="~/megabox/tmp/transform_parquet"):
+  df = transform2df(load_dt)
+  df.to_parquet('~/megabox/tmp/transform_parquet', partition_cols=['load_dt'])
+  return df
 ```
