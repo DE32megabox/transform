@@ -32,11 +32,12 @@ def save2df(load_dt="20210101", path="~/megabox/tmp/transform_parquet"):
     #TODO
     # 1. save2t_df에서 df를 받아오기
     # 2. path에 저장하기
-
+    df['load_dt'] = df['load_dt'].dt.strftime('%Y%m%d')
+    df['load_dt'] = df['load_dt'].astype(int)
+    
     df = transform2df(load_dt)
     df.to_parquet('~/megabox/tmp/transform_parquet', partition_cols=['load_dt'])
     return df
 
-save2df()
 
 
