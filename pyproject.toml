@@ -6,7 +6,7 @@ authors = [
     {name = "minju210", email = "juliana6190210@gmail.com"},
 ]
 dependencies = [
-    "transform @ file:///${PROJECT_ROOT}/",
+   # "transform @ file:///${PROJECT_ROOT}/",
     "pandas>=2.2.2",
     "pyarrow>=17.0.0",
     "pytest>=8.3.2",
