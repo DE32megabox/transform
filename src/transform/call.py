@@ -3,7 +3,7 @@ import os
 
 def apply_type2df(load_dt="20210101", path="~/megabox/tmp/movie_parquet"):
     df = pd.read_parquet(f"{path}/load_dt={load_dt}")
-    num_cols = ['rnum', 'rank', 'rankInten', 'salesAmt', 'audiCnt', 'audiAcc', 'scrnCnt', 'showCnt', 'salesShare', 'salesInten', 'salesChange', 'audiInten', 'audiChange']
+    num_cols = ['rnum', 'movieNm', 'openDt', 'salesAmt',  'audiCnt', 'audiAcc']    #순번, 영화명(국문), 영화개봉일, 당일매출액, 당일관객수
 
     for col in num_cols:
         df[col] = pd.to_numeric(df[col])
@@ -23,7 +23,7 @@ def transform2df(load_dt="20210101"):
     # 3. 2에서 완성한 df를 리턴하기
     
     df = apply_type2df(load_dt)
-    num_cols = ['rnum', 'rank', 'rankInten', 'salesAmt', 'audiCnt', 'audiAcc', 'scrnCnt', 'showCnt', 'salesShare', 'salesInten', 'salesChange', 'audiInten', 'audiChange', 'load_dt']
+    num_cols = ['rnum', 'movieNm', 'openDt', 'salesAmt',  'audiCnt', 'audiAcc']    #순번, 영화명(국문), 영화개봉일, 당일매출액, 당일관객수
     new_df = df[num_cols]
     # new_df.to_parquet('~/megabox/tmp/transform_parquet', partition_cols=['load_dt'])
     return new_df
